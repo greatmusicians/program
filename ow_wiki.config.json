@@ -2,22 +2,11 @@
   "ListenPort": "1235",
   "DirectoryList": [
     {
-      "ID": "",
+      "ID": "Menschen",
       "Name": "Menschen",
-      "Path": "../wiki_deutsch/Menschen",
-      "PublicPathList": null
-    },
-    {
-      "ID": "",
-      "Name": "Menschen2",
-      "Path": "../wiki_deutsch/Menschen2",
-      "PublicPathList": null
-    },
-    {
-      "ID": "",
-      "Name": "other",
-      "Path": "../wiki_deutsch/other",
-      "PublicPathList": null
+      "Path": "../wiki_deutsch",
+      "UseChildren": true,
+      "IsPublic": false
     }
   ],
   "AllowIPList": [
