@@ -6,20 +6,23 @@
 
 # 第一次下载
 `````
-git clone https://github.com/greatmusicians/wiki_deutsch.git
+git clone https://github.com/greatmusicians/wiki.git
+可编辑ow_wiki.config.json，指向下面路径
 
-如果无法成功，可以使用gitclone代理(不能保证最新)
-git clone https://gitclone.com/github.com/greatmusicians/wiki_deutsch.git
+git clone https://github.com/greatmusicians/Menschen.git
+git clone https://github.com/greatmusicians/Menschen2.git
+git clone https://github.com/greatmusicians/other.git
 `````
 
 # 后续更新
 `````
-如果有更改，则丢弃所有修改
+首先尝试
+git pull
+
+
+如果本地有更改，可能会报错。那么可以选择丢弃所有修改（或者先备份自己做的修改）
 git fetch
 git checkout origin/main
-
-如果没有修改，可以直接更新
-git pull
 `````
 
 
