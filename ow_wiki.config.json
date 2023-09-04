@@ -1,0 +1,37 @@
+{
+  "ListenPort": "1235",
+  "DirectoryList": [
+    {
+      "ID": "",
+      "Name": "de",
+      "Path": "../wiki_deutsch/de",
+      "PublicPathList": null
+    },
+    {
+      "ID": "",
+      "Name": "Menschen",
+      "Path": "../wiki_deutsch/Menschen",
+      "PublicPathList": null
+    },
+    {
+      "ID": "",
+      "Name": "Menschen2",
+      "Path": "../wiki_deutsch/Menschen2",
+      "PublicPathList": null
+    },
+    {
+      "ID": "",
+      "Name": "Aspekte",
+      "Path": "../wiki_deutsch/Aspekte",
+      "PublicPathList": null
+    }
+  ],
+  "AllowIPList": [
+    {
+      "IPRegexp": "^.*$",
+      "Allow": true,
+      "Comment": ""
+    }
+  ],
+  "DefaultLanguage": "de"
+}

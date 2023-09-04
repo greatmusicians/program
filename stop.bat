@@ -1,0 +1,1 @@
+taskkill /f /im ow_wiki.exe

@@ -1,0 +1,36 @@
+button,
+input {
+    /* "\5B8B\4F53" 就是宋体的意思 这样浏览器兼容性比较好 */
+    font-family: Microsoft YaHei, Heiti SC, tahoma, arial, Hiragino Sans GB, "\5B8B\4F53", sans-serif;
+    border: 0;
+    outline: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.search {
+    position: absolute;
+    right: 200px;
+    top: 5px;
+    width: 300px;
+    height: 24px;
+    border: 0;
+}
+
+.search input {
+    float: left;
+    width: 200px;
+    height: 24px;
+    padding-left: 5px;
+    background-color: rgb(184, 212, 187);
+    font-size: 14px;
+}
+
+.search button {
+    float: left;
+    width: 50px;
+    height: 24px;
+    background-color: rgb(164, 192, 167);
+    font-size: 16px;
+}

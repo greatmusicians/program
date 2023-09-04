@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+  <title>搜索</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <link rel='stylesheet' type='text/css' href='/css/site_md.css' />
+  <style type="text/css">
+    .search_text {
+      font-size: 16px;
+      max-height: 100px;
+      overflow-y: scroll;
+      border: 1px solid gray;
+      padding: 5px;
+    }
+    .highlight {
+      color: red;
+      background-color: yellow;
+    }
+  </style>
+</head>
+
+<body>
+
+  {{range $k, $v := .}}
+  <div style="margin-bottom: 30px;">
+    <a href="../{{$v.Urlpath}}">{{$v.Urlpath}}</a>
+    <div class="search_text">
+      {{$v.Text}}
+    </div>
+  </div>
+  {{end}}
+
+</body>
+
+</html>

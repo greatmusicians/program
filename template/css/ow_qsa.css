@@ -1,0 +1,61 @@
+.qsa {
+    margin-left: 0em;
+    margin-bottom: 0px;
+}
+
+.qsa-q {
+    white-space: pre;
+    font-size: 90%;
+    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    white-space: pre-wrap;
+    /*css-3*/
+    white-space: -moz-pre-wrap;
+    /*Mozilla,since1999*/
+    white-space: -pre-wrap;
+    /*Opera4-6*/
+    white-space: -o-pre-wrap;
+    /*Opera7*/
+    word-wrap: break-word;
+    /*InternetExplorer5.5+*/
+}
+
+.qsa-s {
+    white-space: pre;
+    font-size: 90%;
+    color: brown;
+    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    white-space: pre-wrap;
+    /*css-3*/
+    white-space: -moz-pre-wrap;
+    /*Mozilla,since1999*/
+    white-space: -pre-wrap;
+    /*Opera4-6*/
+    white-space: -o-pre-wrap;
+    /*Opera7*/
+    word-wrap: break-word;
+    /*InternetExplorer5.5+*/
+}
+
+.qsa-a {
+    white-space: pre;
+    color: grey;
+    font-size: 90%;
+    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    margin: 0 0 0 2em;
+    white-space: pre-wrap;
+    /*css-3*/
+    white-space: -moz-pre-wrap;
+    /*Mozilla,since1999*/
+    white-space: -pre-wrap;
+    /*Opera4-6*/
+    white-space: -o-pre-wrap;
+    /*Opera7*/
+    word-wrap: break-word;
+    /*InternetExplorer5.5+*/
+}
