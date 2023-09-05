@@ -280,6 +280,7 @@ namespace OWListening {
         if (!d) return;
         d.Transcript()?.undoHide();
         d.Audio.scrollIntoView();
+        d.Audio.focus();
         d.Audio.loop = false; // 禁止循环，否则无法触发ended事件
         list.length > 0 && d.Audio.addEventListener('ended', playEndedHandler);
         d.Audio.play();
@@ -291,6 +292,7 @@ namespace OWListening {
             if (!d) return;
             d.Transcript()?.undoHide();
             d.Audio.scrollIntoView();
+            d.Audio.focus();
             d.Audio.loop = false; // 禁止循环，否则无法触发ended事件
             list.length > 0 && d.Audio.addEventListener('ended', playEndedHandler);
             d.Audio.play();

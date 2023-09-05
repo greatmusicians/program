@@ -256,6 +256,7 @@ var OWListening;
             return;
         (_a = d.Transcript()) === null || _a === void 0 ? void 0 : _a.undoHide();
         d.Audio.scrollIntoView();
+        d.Audio.focus();
         d.Audio.loop = false; // 禁止循环，否则无法触发ended事件
         list.length > 0 && d.Audio.addEventListener('ended', playEndedHandler);
         d.Audio.play();
@@ -268,6 +269,7 @@ var OWListening;
                 return;
             (_b = d.Transcript()) === null || _b === void 0 ? void 0 : _b.undoHide();
             d.Audio.scrollIntoView();
+            d.Audio.focus();
             d.Audio.loop = false; // 禁止循环，否则无法触发ended事件
             list.length > 0 && d.Audio.addEventListener('ended', playEndedHandler);
             d.Audio.play();
