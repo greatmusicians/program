@@ -104,17 +104,27 @@ pre {
     /*InternetExplorer5.5+*/
 }
 
-.pre-code-cover {
+pre>code>span.cover {
     color: rgb(200, 200, 200);
     /*与pre中的background-color一致，实现隐藏文字的效果*/
-    border-bottom: 3px solid black;
+    border-bottom: 3px solid brown;
     /*通过设置font-size和vertical-align也能实现border-bottom向上提的效果*/
     /*font-size: 80%;
     vertical-align: top;*/
 }
 
-.pre-code-cover:hover {
+pre>code>span.odd {
+    border-bottom: 3px solid blue;
+}
+
+pre>code>span.cover:hover {
     color: inherit;
+}
+
+/*用于给空格加上小圆点的背景，暂不启用*/
+pre>code>span.space {
+    /* https://www.svgbackgrounds.com/tools/svg-to-css/ */
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" version="1.1"><circle cx="3" cy="20" r="2" fill="darkgray" /></svg>');
 }
 
 form {

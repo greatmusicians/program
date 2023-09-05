@@ -103,18 +103,25 @@ namespace OWListening {
             lineList.forEach((line, i) => {
                 if (line.indexOf("</span>:") >= 0) {
                     let pos = line.lastIndexOf("</span>:")
-                    let part1 = line.substring(0, pos + "</span>:".length);
-                    //https://blog.csdn.net/weixin_43263355/article/details/124120206
-                    let part2 = line.substring(pos + "</span>:".length)
-                        .replace(/[a-zA-ZäÄüÜöÖß-]{5,}|\d[\d\s\.,]*\d/g,
-                            `<span class="pre-code-cover">$&</span>`);
-                    lineList[i] = part1 + part2;
+                    lineList[i] = line.substring(0, pos + "</span>: ".length)
+                        + this.coverLine(line.substring(pos + "</span>: ".length));
                 } else {
-                    lineList[i] = line.replace(/[a-zA-ZäÄüÜöÖß-]{5,}|\d[\d\s\.,]*\d/g,
-                        `<span class="pre-code-cover">$&</span>`);
+                    lineList[i] = this.coverLine(line);
                 }
             });
             this.Code.innerHTML = lineList.join("\n");
+        }
+
+        coverLine(line: string): string {
+            let odd = false;
+            var replacer = function (m: string): string {
+                odd = !odd;
+                return odd ? `<span class="cover odd">${m}</span>`
+                    : `<span class="cover">${m}</span>`;
+            }
+            return line.replace(/[a-zA-ZäÄüÜöÖß-]{5,}/g, replacer)
+                .replace(/\d+ Uhr \d+/g, replacer)
+                .replace(/\d[\d\s\.,/:]*\d/g, replacer);
         }
     }
 

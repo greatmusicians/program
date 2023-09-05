@@ -90,21 +90,30 @@ var OWListening;
             return "";
         };
         Text.prototype.coverText = function () {
+            var _this = this;
             var lineList = this.Code.innerHTML.split("\n");
             lineList.forEach(function (line, i) {
                 if (line.indexOf("</span>:") >= 0) {
                     var pos = line.lastIndexOf("</span>:");
-                    var part1 = line.substring(0, pos + "</span>:".length);
-                    //https://blog.csdn.net/weixin_43263355/article/details/124120206
-                    var part2 = line.substring(pos + "</span>:".length)
-                        .replace(/[a-zA-ZäÄüÜöÖß-]{5,}|\d[\d\s\.,]*\d/g, "<span class=\"pre-code-cover\">$&</span>");
-                    lineList[i] = part1 + part2;
+                    lineList[i] = line.substring(0, pos + "</span>: ".length)
+                        + _this.coverLine(line.substring(pos + "</span>: ".length));
                 }
                 else {
-                    lineList[i] = line.replace(/[a-zA-ZäÄüÜöÖß-]{5,}|\d[\d\s\.,]*\d/g, "<span class=\"pre-code-cover\">$&</span>");
+                    lineList[i] = _this.coverLine(line);
                 }
             });
             this.Code.innerHTML = lineList.join("\n");
+        };
+        Text.prototype.coverLine = function (line) {
+            var odd = false;
+            var replacer = function (m) {
+                odd = !odd;
+                return odd ? "<span class=\"cover odd\">".concat(m, "</span>")
+                    : "<span class=\"cover\">".concat(m, "</span>");
+            };
+            return line.replace(/[a-zA-ZäÄüÜöÖß-]{5,}/g, replacer)
+                .replace(/\d+ Uhr \d+/g, replacer)
+                .replace(/\d[\d\s\.,/:]*\d/g, replacer);
         };
         return Text;
     }());
