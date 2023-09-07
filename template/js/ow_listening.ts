@@ -24,10 +24,12 @@ namespace OWListening {
     class Text {
         Pre: HTMLElement;
         Code: HTMLElement;
+        HighlightText: string; //已经highlight过的原始文本，用于覆盖单词
 
         constructor(pre: HTMLElement, code: HTMLElement) {
             this.Pre = pre;
             this.Code = code;
+            this.HighlightText = this.highlight(this.Code.innerHTML);
         }
 
         doHide(): void {
@@ -46,17 +48,18 @@ namespace OWListening {
             }
         }
 
-        highlight(): Text {
-            let newContent = "";
+        //highlight()应该在coverText()前面被调用
+        highlight(text: string): string {
+            let newtext = "";
             let colorMap = new Map<string, string>();
             let colorIndex = 0;
-            this.Code.innerHTML.split("\n").forEach((line, index, arr) => {
+            text.split("\n").forEach((line, index, arr) => {
                 if (index < arr.length - 1) {
                     line += "\n";
                 }
                 let name = this.parseName(line);
                 if (name == "") {
-                    newContent += line;
+                    newtext += line;
                     return
                 }
                 let color = colorMap.get(name) || "";
@@ -70,10 +73,9 @@ namespace OWListening {
                 //设置为90%大小，是为了不遮挡其他文字的下划线(使用border制作的下划线)
                 let newline = line.replace(name,
                     `<span style="font-size: 90%;background-color: ${color};">${name}</span>`);
-                newContent += newline;
+                newtext += newline;
             })
-            this.Code.innerHTML = newContent;
-            return this;
+            return newtext;
         }
 
         /**
@@ -98,28 +100,42 @@ namespace OWListening {
             return "";
         }
 
-        coverText(): void {
-            let lineList = this.Code.innerHTML.split("\n");
+        /**
+         * coverText(0)只会将文本设置为highlight过的文本，不会执行覆盖
+         * 大于等于length长度的单词会被覆盖。若length为0，不进行覆盖
+         */
+        coverText(length: number): void {
+            if (length < 1) {
+                this.Code.innerHTML = this.HighlightText;
+                return;
+            }
+            let lineList = this.HighlightText.split("\n");
             lineList.forEach((line, i) => {
                 if (line.indexOf("</span>:") >= 0) {
                     let pos = line.lastIndexOf("</span>:")
                     lineList[i] = line.substring(0, pos + "</span>: ".length)
-                        + this.coverLine(line.substring(pos + "</span>: ".length));
+                        + this.coverLine(line.substring(pos + "</span>: ".length), length);
                 } else {
-                    lineList[i] = this.coverLine(line);
+                    lineList[i] = this.coverLine(line, length);
                 }
             });
             this.Code.innerHTML = lineList.join("\n");
         }
 
-        coverLine(line: string): string {
+        /**
+         * 大于等于length长度的单词会被覆盖。若length为0，不进行覆盖
+         */
+        coverLine(line: string, length: number): string {
+            if (length < 1) {
+                return line;
+            }
             let odd = false;
             var replacer = function (m: string): string {
                 odd = !odd;
                 return odd ? `<span class="cover odd">${m}</span>`
                     : `<span class="cover">${m}</span>`;
             }
-            return line.replace(/[a-zA-ZäÄüÜöÖß-]{5,}/g, replacer)
+            return line.replace(RegExp(`[a-zA-ZäÄüÜöÖß-]{${length},}`, "g"), replacer)
                 .replace(/\d+ Uhr \d+/g, replacer)
                 .replace(/\d[\d\s\.,/:]*\d/g, replacer);
         }
@@ -129,14 +145,14 @@ namespace OWListening {
         Header: Element;
         P: HTMLElement;
         Audio: HTMLAudioElement;
-        AudioLoop: boolean;
+        AudioOriginalLoop: boolean;
         TextList: Text[];
 
         constructor(header: Element, p: HTMLElement, audio: HTMLAudioElement, textList: Text[]) {
             this.Header = header;
             this.P = p;
             this.Audio = audio;
-            this.AudioLoop = audio.loop;
+            this.AudioOriginalLoop = audio.loop;
             this.TextList = textList;
 
             //设置audio的显示样式
@@ -222,7 +238,7 @@ namespace OWListening {
 
         if (print) {
             GlobalList.forEach((e, i) => {
-                e.Transcript()?.highlight();
+                e.Transcript()?.coverText(0);
                 e.Note().forEach(e => e.doHide());
             })
             return
@@ -233,6 +249,9 @@ namespace OWListening {
             container?.appendChild(newButton("▶ 全部", `OWListening.playFrom(0, false, 1)`));
             container?.appendChild(newButton("▶ 全部x3", `OWListening.playFrom(0, false, 3)`));
             container?.appendChild(newButton("显示/隐藏文本/备注", `OWListening.reverseHide(-1, true, true)`));
+            container?.appendChild(newButton("覆盖0", `OWListening.coverText(-1, 0)`));
+            container?.appendChild(newButton("覆盖1", `OWListening.coverText(-1, 1)`));
+            container?.appendChild(newButton("覆盖5", `OWListening.coverText(-1, 5)`));
         }
 
         GlobalList.forEach((e, i) => {
@@ -240,6 +259,8 @@ namespace OWListening {
             e.appendButton(Position.AfterAudio, newButton("▶ 向后x3", `OWListening.playFrom(${i}, false, 3)`));
             e.appendButton(Position.AfterAudio, newButton("▶ 向前", `OWListening.playFrom(${i}, true, 1)`));
             e.appendButton(Position.AfterAudio, newButton("▶ 向前x3", `OWListening.playFrom(${i}, true, 3)`));
+            e.appendButton(Position.AfterAudio, newButton("覆盖1", `OWListening.coverText(${i}, 1)`));
+            e.appendButton(Position.AfterAudio, newButton("覆盖5", `OWListening.coverText(${i}, 5)`));
 
             e.Transcript() &&
                 e.appendButton(Position.AfterAudio, newButton("文本", `OWListening.reverseHide(${i}, true, false)`));
@@ -247,7 +268,7 @@ namespace OWListening {
                 e.appendButton(Position.AfterAudio, newButton("备注", `OWListening.reverseHide(${i}, false, true)`));
             doHide(-1, true, true);
 
-            e.Transcript()?.highlight().coverText();
+            e.Transcript()?.coverText(5);
         })
     }
 
@@ -295,7 +316,7 @@ namespace OWListening {
         var restore = function (d: Data) {
             d.Audio.removeEventListener('ended', playEndedHandler);
             d.Transcript()?.doHide();
-            d.Audio.loop = d.AudioLoop;
+            d.Audio.loop = d.AudioOriginalLoop;
         }
 
         var d = list.pop();
@@ -307,7 +328,7 @@ namespace OWListening {
         }
     }
 
-    export function doHide(index: number, transcript: boolean, note: boolean) {
+    export function doHide(index: number, transcript: boolean, note: boolean): void {
         if (index >= 0) {
             transcript && GlobalList[index].Transcript()?.doHide();
             note && GlobalList[index].Note().forEach(e => e.doHide());
@@ -319,7 +340,7 @@ namespace OWListening {
         }
     }
 
-    export function undoHide(index: number, transcript: boolean, note: boolean) {
+    export function undoHide(index: number, transcript: boolean, note: boolean): void {
         if (index >= 0) {
             transcript && GlobalList[index].Transcript()?.undoHide();
             note && GlobalList[index].Note().forEach(e => e.undoHide());
@@ -331,7 +352,7 @@ namespace OWListening {
         }
     }
 
-    export function reverseHide(index: number, transcript: boolean, note: boolean) {
+    export function reverseHide(index: number, transcript: boolean, note: boolean): void {
         if (index >= 0) {
             transcript && GlobalList[index].Transcript()?.reverseHide();
             note && GlobalList[index].Note().forEach(e => e.reverseHide());
@@ -339,6 +360,16 @@ namespace OWListening {
             GlobalList.forEach((v) => {
                 transcript && v.Transcript()?.reverseHide();
                 note && v.Note().forEach(e => e.reverseHide());
+            });
+        }
+    }
+
+    export function coverText(index: number, length: number): void {
+        if (index >= 0) {
+            GlobalList[index].Transcript()?.coverText(length);
+        } else {
+            GlobalList.forEach((v) => {
+                v.Transcript()?.coverText(length);
             });
         }
     }

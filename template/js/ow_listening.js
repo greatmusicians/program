@@ -24,6 +24,7 @@ var OWListening;
         function Text(pre, code) {
             this.Pre = pre;
             this.Code = code;
+            this.HighlightText = this.highlight(this.Code.innerHTML);
         }
         Text.prototype.doHide = function () {
             this.Pre.style.display = "none";
@@ -39,18 +40,19 @@ var OWListening;
                 this.doHide();
             }
         };
-        Text.prototype.highlight = function () {
+        //highlight()应该在coverText()前面被调用
+        Text.prototype.highlight = function (text) {
             var _this = this;
-            var newContent = "";
+            var newtext = "";
             var colorMap = new Map();
             var colorIndex = 0;
-            this.Code.innerHTML.split("\n").forEach(function (line, index, arr) {
+            text.split("\n").forEach(function (line, index, arr) {
                 if (index < arr.length - 1) {
                     line += "\n";
                 }
                 var name = _this.parseName(line);
                 if (name == "") {
-                    newContent += line;
+                    newtext += line;
                     return;
                 }
                 var color = colorMap.get(name) || "";
@@ -63,10 +65,9 @@ var OWListening;
                 //replace函数默认只替换一次，正好满足我们的需要
                 //设置为90%大小，是为了不遮挡其他文字的下划线(使用border制作的下划线)
                 var newline = line.replace(name, "<span style=\"font-size: 90%;background-color: ".concat(color, ";\">").concat(name, "</span>"));
-                newContent += newline;
+                newtext += newline;
             });
-            this.Code.innerHTML = newContent;
-            return this;
+            return newtext;
         };
         /**
          * 解析人名，特征是：
@@ -89,29 +90,43 @@ var OWListening;
             }
             return "";
         };
-        Text.prototype.coverText = function () {
+        /**
+         * coverText(0)只会将文本设置为highlight过的文本，不会执行覆盖
+         * 大于等于length长度的单词会被覆盖。若length为0，不进行覆盖
+         */
+        Text.prototype.coverText = function (length) {
             var _this = this;
-            var lineList = this.Code.innerHTML.split("\n");
+            if (length < 1) {
+                this.Code.innerHTML = this.HighlightText;
+                return;
+            }
+            var lineList = this.HighlightText.split("\n");
             lineList.forEach(function (line, i) {
                 if (line.indexOf("</span>:") >= 0) {
                     var pos = line.lastIndexOf("</span>:");
                     lineList[i] = line.substring(0, pos + "</span>: ".length)
-                        + _this.coverLine(line.substring(pos + "</span>: ".length));
+                        + _this.coverLine(line.substring(pos + "</span>: ".length), length);
                 }
                 else {
-                    lineList[i] = _this.coverLine(line);
+                    lineList[i] = _this.coverLine(line, length);
                 }
             });
             this.Code.innerHTML = lineList.join("\n");
         };
-        Text.prototype.coverLine = function (line) {
+        /**
+         * 大于等于length长度的单词会被覆盖。若length为0，不进行覆盖
+         */
+        Text.prototype.coverLine = function (line, length) {
+            if (length < 1) {
+                return line;
+            }
             var odd = false;
             var replacer = function (m) {
                 odd = !odd;
                 return odd ? "<span class=\"cover odd\">".concat(m, "</span>")
                     : "<span class=\"cover\">".concat(m, "</span>");
             };
-            return line.replace(/[a-zA-ZäÄüÜöÖß-]{5,}/g, replacer)
+            return line.replace(RegExp("[a-zA-Z\u00E4\u00C4\u00FC\u00DC\u00F6\u00D6\u00DF-]{".concat(length, ",}"), "g"), replacer)
                 .replace(/\d+ Uhr \d+/g, replacer)
                 .replace(/\d[\d\s\.,/:]*\d/g, replacer);
         };
@@ -122,7 +137,7 @@ var OWListening;
             this.Header = header;
             this.P = p;
             this.Audio = audio;
-            this.AudioLoop = audio.loop;
+            this.AudioOriginalLoop = audio.loop;
             this.TextList = textList;
             //设置audio的显示样式
             this.Audio.setAttribute("controlsList", "nodownload");
@@ -199,7 +214,7 @@ var OWListening;
         if (print) {
             GlobalList.forEach(function (e, i) {
                 var _a;
-                (_a = e.Transcript()) === null || _a === void 0 ? void 0 : _a.highlight();
+                (_a = e.Transcript()) === null || _a === void 0 ? void 0 : _a.coverText(0);
                 e.Note().forEach(function (e) { return e.doHide(); });
             });
             return;
@@ -209,6 +224,9 @@ var OWListening;
             container === null || container === void 0 ? void 0 : container.appendChild(newButton("▶ 全部", "OWListening.playFrom(0, false, 1)"));
             container === null || container === void 0 ? void 0 : container.appendChild(newButton("▶ 全部x3", "OWListening.playFrom(0, false, 3)"));
             container === null || container === void 0 ? void 0 : container.appendChild(newButton("显示/隐藏文本/备注", "OWListening.reverseHide(-1, true, true)"));
+            container === null || container === void 0 ? void 0 : container.appendChild(newButton("覆盖0", "OWListening.coverText(-1, 0)"));
+            container === null || container === void 0 ? void 0 : container.appendChild(newButton("覆盖1", "OWListening.coverText(-1, 1)"));
+            container === null || container === void 0 ? void 0 : container.appendChild(newButton("覆盖5", "OWListening.coverText(-1, 5)"));
         }
         GlobalList.forEach(function (e, i) {
             var _a;
@@ -216,12 +234,14 @@ var OWListening;
             e.appendButton(Position.AfterAudio, newButton("▶ 向后x3", "OWListening.playFrom(".concat(i, ", false, 3)")));
             e.appendButton(Position.AfterAudio, newButton("▶ 向前", "OWListening.playFrom(".concat(i, ", true, 1)")));
             e.appendButton(Position.AfterAudio, newButton("▶ 向前x3", "OWListening.playFrom(".concat(i, ", true, 3)")));
+            e.appendButton(Position.AfterAudio, newButton("覆盖1", "OWListening.coverText(".concat(i, ", 1)")));
+            e.appendButton(Position.AfterAudio, newButton("覆盖5", "OWListening.coverText(".concat(i, ", 5)")));
             e.Transcript() &&
                 e.appendButton(Position.AfterAudio, newButton("文本", "OWListening.reverseHide(".concat(i, ", true, false)")));
             e.Note().length > 0 &&
                 e.appendButton(Position.AfterAudio, newButton("备注", "OWListening.reverseHide(".concat(i, ", false, true)")));
             doHide(-1, true, true);
-            (_a = e.Transcript()) === null || _a === void 0 ? void 0 : _a.highlight().coverText();
+            (_a = e.Transcript()) === null || _a === void 0 ? void 0 : _a.coverText(5);
         });
     }
     OWListening.init = init;
@@ -268,7 +288,7 @@ var OWListening;
             var _a;
             d.Audio.removeEventListener('ended', playEndedHandler);
             (_a = d.Transcript()) === null || _a === void 0 ? void 0 : _a.doHide();
-            d.Audio.loop = d.AudioLoop;
+            d.Audio.loop = d.AudioOriginalLoop;
         };
         var d = list.pop();
         d && play(d);
@@ -324,6 +344,19 @@ var OWListening;
         }
     }
     OWListening.reverseHide = reverseHide;
+    function coverText(index, length) {
+        var _a;
+        if (index >= 0) {
+            (_a = GlobalList[index].Transcript()) === null || _a === void 0 ? void 0 : _a.coverText(length);
+        }
+        else {
+            GlobalList.forEach(function (v) {
+                var _a;
+                (_a = v.Transcript()) === null || _a === void 0 ? void 0 : _a.coverText(length);
+            });
+        }
+    }
+    OWListening.coverText = coverText;
 })(OWListening || (OWListening = {}));
 // 使用以下命令生成ow_listening.js
 // tsc ow_listening.ts --target "es5" --lib "es2015,dom" --downlevelIteration
