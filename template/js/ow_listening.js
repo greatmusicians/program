@@ -122,6 +122,7 @@ var OWListening;
             this.Header = header;
             this.P = p;
             this.Audio = audio;
+            this.AudioLoop = audio.loop;
             this.TextList = textList;
             //设置audio的显示样式
             this.Audio.setAttribute("controlsList", "nodownload");
@@ -131,6 +132,10 @@ var OWListening;
             this.P.style.display = "flex";
             this.P.style.alignItems = "center";
             this.P.style.marginLeft = "2em";
+            //设置audio更方便的被选中，从而使用空格控制播放或暂停
+            this.Audio.onmouseover = function (ev) {
+                ev.target.focus();
+            };
         }
         Data.prototype.appendButton = function (pos, button) {
             switch (pos) {
@@ -232,7 +237,6 @@ var OWListening;
      * forward、afterward
      */
     function playFrom(index, forward, repeat) {
-        var _a;
         repeat = Math.floor(repeat);
         var list = new Array();
         if (forward) {
@@ -251,28 +255,27 @@ var OWListening;
                 }
             }
         }
-        var d = list.pop();
-        if (!d)
-            return;
-        (_a = d.Transcript()) === null || _a === void 0 ? void 0 : _a.undoHide();
-        d.Audio.scrollIntoView();
-        d.Audio.focus();
-        d.Audio.loop = false; // 禁止循环，否则无法触发ended事件
-        list.length > 0 && d.Audio.addEventListener('ended', playEndedHandler);
-        d.Audio.play();
-        function playEndedHandler() {
-            var _a, _b;
-            d === null || d === void 0 ? void 0 : d.Audio.removeEventListener('ended', playEndedHandler);
-            (_a = d === null || d === void 0 ? void 0 : d.Transcript()) === null || _a === void 0 ? void 0 : _a.doHide();
-            d = list.pop();
-            if (!d)
-                return;
-            (_b = d.Transcript()) === null || _b === void 0 ? void 0 : _b.undoHide();
+        var play = function (d) {
+            var _a;
+            (_a = d.Transcript()) === null || _a === void 0 ? void 0 : _a.undoHide();
             d.Audio.scrollIntoView();
             d.Audio.focus();
             d.Audio.loop = false; // 禁止循环，否则无法触发ended事件
             list.length > 0 && d.Audio.addEventListener('ended', playEndedHandler);
             d.Audio.play();
+        };
+        var restore = function (d) {
+            var _a;
+            d.Audio.removeEventListener('ended', playEndedHandler);
+            (_a = d.Transcript()) === null || _a === void 0 ? void 0 : _a.doHide();
+            d.Audio.loop = d.AudioLoop;
+        };
+        var d = list.pop();
+        d && play(d);
+        function playEndedHandler() {
+            d && restore(d);
+            d = list.pop();
+            d && play(d);
         }
     }
     OWListening.playFrom = playFrom;

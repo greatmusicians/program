@@ -129,12 +129,14 @@ namespace OWListening {
         Header: Element;
         P: HTMLElement;
         Audio: HTMLAudioElement;
+        AudioLoop: boolean;
         TextList: Text[];
 
         constructor(header: Element, p: HTMLElement, audio: HTMLAudioElement, textList: Text[]) {
             this.Header = header;
             this.P = p;
             this.Audio = audio;
+            this.AudioLoop = audio.loop;
             this.TextList = textList;
 
             //设置audio的显示样式
@@ -146,6 +148,11 @@ namespace OWListening {
             this.P.style.display = "flex";
             this.P.style.alignItems = "center";
             this.P.style.marginLeft = "2em";
+
+            //设置audio更方便的被选中，从而使用空格控制播放或暂停
+            this.Audio.onmouseover = (ev) => {
+                (ev.target as HTMLAudioElement).focus();
+            }
         }
 
         appendButton(pos: Position, button: HTMLButtonElement): void {
@@ -276,26 +283,27 @@ namespace OWListening {
             }
         }
 
-        var d = list.pop();
-        if (!d) return;
-        d.Transcript()?.undoHide();
-        d.Audio.scrollIntoView();
-        d.Audio.focus();
-        d.Audio.loop = false; // 禁止循环，否则无法触发ended事件
-        list.length > 0 && d.Audio.addEventListener('ended', playEndedHandler);
-        d.Audio.play();
-        function playEndedHandler() {
-            d?.Audio.removeEventListener('ended', playEndedHandler);
-            d?.Transcript()?.doHide();
-
-            d = list.pop();
-            if (!d) return;
+        var play = function (d: Data) {
             d.Transcript()?.undoHide();
             d.Audio.scrollIntoView();
             d.Audio.focus();
             d.Audio.loop = false; // 禁止循环，否则无法触发ended事件
             list.length > 0 && d.Audio.addEventListener('ended', playEndedHandler);
             d.Audio.play();
+        }
+
+        var restore = function (d: Data) {
+            d.Audio.removeEventListener('ended', playEndedHandler);
+            d.Transcript()?.doHide();
+            d.Audio.loop = d.AudioLoop;
+        }
+
+        var d = list.pop();
+        d && play(d);
+        function playEndedHandler() {
+            d && restore(d);
+            d = list.pop();
+            d && play(d);
         }
     }
 

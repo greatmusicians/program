@@ -167,8 +167,12 @@ img {
 
 audio {
     text-indent: 0;
-    /*width: 500px;
-    height: 54px;*/
+}
+
+audio:focus {
+    background-color: #007bff;
+    border: 2px solid #007bff;
+    border-radius: .3rem;
 }
 
 .top-container {
