@@ -2,9 +2,7 @@
   "ListenPort": "1235",
   "DirectoryList": [
     {
-      "ID": "Menschen",
-      "Name": "Menschen",
-      "Path": "../wiki_deutsch",
+      "Path": "../",
       "UseChildren": true,
       "IsPublic": false
     }
