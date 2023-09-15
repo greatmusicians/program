@@ -1,7 +1,7 @@
+original_dir=$(pwd)
+
 function push() {
-    original_dir=$1
-    repo_dir=$2
-    cd $repo_dir
+    cd $1
     echo "==================== git push ===================="
     echo $(pwd)
     if [ -n "$(git status --porcelain)" ]; then
@@ -16,33 +16,21 @@ function push() {
 }
 
 function pull() {
-    original_dir=$1
-    repo_dir=$2
-    cd $repo_dir
+    cd $1
     echo "==================== git pull ===================="
     echo $(pwd)
     git pull
     cd $original_dir
 }
 
-original_dir=$(pwd)
-case $1 in
-pull)
-    pull $original_dir ./Menschen
-    pull $original_dir ./Menschen2
-    pull $original_dir ./program
-    pull $original_dir ./other
-    ;;
-push)
-    push $original_dir ./Menschen
-    push $original_dir ./Menschen2
-    push $original_dir ./program
-    push $original_dir ./other
-    ;;
-*)
-    push $original_dir ./Menschen
-    push $original_dir ./Menschen2
-    push $original_dir ./program
-    push $original_dir ./other
-    ;;
-esac
+if [ $1 == "pull" ];then
+    pull ./Menschen    
+    pull ./Menschen2
+    pull ./program
+    pull ./other
+else
+    push ./Menschen
+    push ./Menschen2
+    push ./program
+    push ./other
+fi
