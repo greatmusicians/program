@@ -126,7 +126,8 @@ var OWListening;
                 return odd ? "<span class=\"cover odd\">".concat(m, "</span>")
                     : "<span class=\"cover\">".concat(m, "</span>");
             };
-            return line.replace(RegExp("[a-zA-Z\u00E4\u00C4\u00FC\u00DC\u00F6\u00D6\u00DF-]{".concat(length, ",}"), "g"), replacer)
+            return line
+                .replace(RegExp("\\d*[a-zA-Z\u00E4\u00C4\u00FC\u00DC\u00F6\u00D6\u00DF-]{".concat(length, ",}"), "g"), replacer)
                 .replace(/\d+ Uhr \d+/g, replacer)
                 .replace(/\d[\d\s\.,/:]*\d/g, replacer);
         };
@@ -226,7 +227,7 @@ var OWListening;
             container === null || container === void 0 ? void 0 : container.appendChild(newButton("显示/隐藏文本/备注", "OWListening.reverseHide(-1, true, true)"));
             container === null || container === void 0 ? void 0 : container.appendChild(newButton("覆盖0", "OWListening.coverText(-1, 0)"));
             container === null || container === void 0 ? void 0 : container.appendChild(newButton("覆盖1", "OWListening.coverText(-1, 1)"));
-            container === null || container === void 0 ? void 0 : container.appendChild(newButton("覆盖5", "OWListening.coverText(-1, 5)"));
+            container === null || container === void 0 ? void 0 : container.appendChild(newButton("覆盖4", "OWListening.coverText(-1, 4)"));
         }
         GlobalList.forEach(function (e, i) {
             var _a;
@@ -235,13 +236,13 @@ var OWListening;
             e.appendButton(Position.AfterAudio, newButton("▶ 向前", "OWListening.playFrom(".concat(i, ", true, 1)")));
             e.appendButton(Position.AfterAudio, newButton("▶ 向前x3", "OWListening.playFrom(".concat(i, ", true, 3)")));
             e.appendButton(Position.AfterAudio, newButton("覆盖1", "OWListening.coverText(".concat(i, ", 1)")));
-            e.appendButton(Position.AfterAudio, newButton("覆盖5", "OWListening.coverText(".concat(i, ", 5)")));
+            e.appendButton(Position.AfterAudio, newButton("覆盖4", "OWListening.coverText(".concat(i, ", 4)")));
             e.Transcript() &&
                 e.appendButton(Position.AfterAudio, newButton("文本", "OWListening.reverseHide(".concat(i, ", true, false)")));
             e.Note().length > 0 &&
                 e.appendButton(Position.AfterAudio, newButton("备注", "OWListening.reverseHide(".concat(i, ", false, true)")));
             doHide(-1, true, true);
-            (_a = e.Transcript()) === null || _a === void 0 ? void 0 : _a.coverText(5);
+            (_a = e.Transcript()) === null || _a === void 0 ? void 0 : _a.coverText(4);
         });
     }
     OWListening.init = init;

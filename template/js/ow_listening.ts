@@ -135,7 +135,8 @@ namespace OWListening {
                 return odd ? `<span class="cover odd">${m}</span>`
                     : `<span class="cover">${m}</span>`;
             }
-            return line.replace(RegExp(`[a-zA-ZäÄüÜöÖß-]{${length},}`, "g"), replacer)
+            return line
+                .replace(RegExp(`\\d*[a-zA-ZäÄüÜöÖß-]{${length},}`, "g"), replacer)
                 .replace(/\d+ Uhr \d+/g, replacer)
                 .replace(/\d[\d\s\.,/:]*\d/g, replacer);
         }
@@ -251,7 +252,7 @@ namespace OWListening {
             container?.appendChild(newButton("显示/隐藏文本/备注", `OWListening.reverseHide(-1, true, true)`));
             container?.appendChild(newButton("覆盖0", `OWListening.coverText(-1, 0)`));
             container?.appendChild(newButton("覆盖1", `OWListening.coverText(-1, 1)`));
-            container?.appendChild(newButton("覆盖5", `OWListening.coverText(-1, 5)`));
+            container?.appendChild(newButton("覆盖4", `OWListening.coverText(-1, 4)`));
         }
 
         GlobalList.forEach((e, i) => {
@@ -260,7 +261,7 @@ namespace OWListening {
             e.appendButton(Position.AfterAudio, newButton("▶ 向前", `OWListening.playFrom(${i}, true, 1)`));
             e.appendButton(Position.AfterAudio, newButton("▶ 向前x3", `OWListening.playFrom(${i}, true, 3)`));
             e.appendButton(Position.AfterAudio, newButton("覆盖1", `OWListening.coverText(${i}, 1)`));
-            e.appendButton(Position.AfterAudio, newButton("覆盖5", `OWListening.coverText(${i}, 5)`));
+            e.appendButton(Position.AfterAudio, newButton("覆盖4", `OWListening.coverText(${i}, 4)`));
 
             e.Transcript() &&
                 e.appendButton(Position.AfterAudio, newButton("文本", `OWListening.reverseHide(${i}, true, false)`));
@@ -268,7 +269,7 @@ namespace OWListening {
                 e.appendButton(Position.AfterAudio, newButton("备注", `OWListening.reverseHide(${i}, false, true)`));
             doHide(-1, true, true);
 
-            e.Transcript()?.coverText(5);
+            e.Transcript()?.coverText(4);
         })
     }
 
