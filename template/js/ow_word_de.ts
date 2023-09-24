@@ -64,6 +64,9 @@ namespace OWWordDE {
                     if (this.WList[0].match("^(der|die|das) [A-ZÜÖÄ][^ ]+$")) {
                         return Typ.einfach_Nomen;
                     }
+                    if (this.WList[0].match("^(der|die|das)$")) {
+                        return Typ.Fehler;
+                    }
                     //<W1>Hausaufgaben machen</W1><W2>做作业</W2>
                     return Typ.einfach;
                 case 4:
@@ -115,16 +118,16 @@ namespace OWWordDE {
             }
             switch (this.Typ) {
                 case Typ.Verb:
-                    addQuestion(this.WList[0], this.WList[3]);
+                    addQuestion(this.WList[0], "[Verb] " + this.WList[3]);
                     break;
                 case Typ.Nomen:
-                    addQuestion(this.WList[1], this.WList[3]);
+                    addQuestion(this.WList[1], "[Nomen] " + this.WList[3]);
                     break;
                 case Typ.einfach:
-                    addQuestion(this.WList[0], this.WList[1]);
+                    addQuestion(this.WList[0], "[2] " + this.WList[1]);
                     break;
                 case Typ.einfach_Nomen:
-                    addQuestion(this.WList[0].substring(4), this.WList[1]);
+                    addQuestion(this.WList[0].substring(4), "[Nomen] " + this.WList[1]);
                     break;
             }
             return qList[Math.floor((Math.random() * qList.length))];

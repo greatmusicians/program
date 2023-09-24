@@ -7,11 +7,13 @@ IF "%~1"=="pull" (
   CALL :pull Menschen2
   CALL :pull program
   CALL :pull other
+  CALL :pull Goethe_B1_Wortliste
 ) ELSE (
   CALL :push Menschen
   CALL :push Menschen2
   CALL :push program
   CALL :push other
+  CALL :push Goethe_B1_Wortliste
 )
 
 EXIT /B %ERRORLEVEL%
