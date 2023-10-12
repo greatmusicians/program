@@ -213,7 +213,7 @@ var OWListening;
             GlobalList.push(new Data(header, p, audio, textList));
         });
         if (print) {
-            GlobalList.forEach(function (e, i) {
+            GlobalList.forEach(function (e) {
                 var _a;
                 (_a = e.Transcript()) === null || _a === void 0 ? void 0 : _a.coverText(0);
                 e.Note().forEach(function (e) { return e.doHide(); });
