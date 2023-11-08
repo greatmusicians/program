@@ -269,7 +269,7 @@ namespace OWListening {
                 e.appendButton(Position.AfterAudio, newButton("备注", `OWListening.reverseHide(${i}, false, true)`));
             doHide(-1, true, true);
 
-            e.Transcript()?.coverText(4);
+            e.Transcript()?.coverText(1);
         })
     }
 

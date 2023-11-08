@@ -242,7 +242,7 @@ var OWListening;
             e.Note().length > 0 &&
                 e.appendButton(Position.AfterAudio, newButton("备注", "OWListening.reverseHide(".concat(i, ", false, true)")));
             doHide(-1, true, true);
-            (_a = e.Transcript()) === null || _a === void 0 ? void 0 : _a.coverText(4);
+            (_a = e.Transcript()) === null || _a === void 0 ? void 0 : _a.coverText(1);
         });
     }
     OWListening.init = init;
