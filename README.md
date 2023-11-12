@@ -12,7 +12,9 @@
 cd D:\wiki_deutsch
 git clone https://github.com/greatmusicians/program.git
 git clone https://github.com/greatmusicians/Menschen.git
-git clone https://github.com/greatmusicians/Menschen2.git
+git clone https://github.com/greatmusicians/Menschen_Berufstrainer.git
+git clone https://github.com/greatmusicians/Menschen_Intensivtrainer.git
+git clone https://github.com/greatmusicians/Menschen_Testtrainer.git
 git clone https://github.com/greatmusicians/other.git
 `````
 

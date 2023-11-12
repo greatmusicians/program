@@ -4,12 +4,16 @@ SET original_dir="%cd%"
 
 IF "%~1"=="pull" (
   CALL :pull Menschen
-  CALL :pull Menschen2
+  CALL :pull Menschen_Berufstrainer
+  CALL :pull Menschen_Intensivtrainer
+  CALL :pull Menschen_Testtrainer
   CALL :pull program
   CALL :pull other
 ) ELSE (
   CALL :push Menschen
-  CALL :push Menschen2
+  CALL :pull Menschen_Berufstrainer
+  CALL :pull Menschen_Intensivtrainer
+  CALL :pull Menschen_Testtrainer
   CALL :push program
   CALL :push other
 )

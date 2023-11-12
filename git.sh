@@ -25,12 +25,16 @@ function pull() {
 
 if [ "$1" = "pull" ]; then
     pull ./Menschen
-    pull ./Menschen2
+    pull ./Menschen_Berufstrainer
+    pull ./Menschen_Intensivtrainer
+    pull ./Menschen_Testtrainer
     pull ./program
     pull ./other
 else
     push ./Menschen
-    push ./Menschen2
+    push ./Menschen_Berufstrainer
+    push ./Menschen_Intensivtrainer
+    push ./Menschen_Testtrainer
     push ./program
     push ./other
 fi
