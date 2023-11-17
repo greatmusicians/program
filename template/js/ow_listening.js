@@ -127,7 +127,7 @@ var OWListening;
                     : "<span class=\"cover\">".concat(m, "</span>");
             };
             return line
-                .replace(RegExp("\\d*[a-zA-Z\u00E4\u00C4\u00FC\u00DC\u00F6\u00D6\u00DF\u00E9-]{".concat(length, ",}"), "g"), replacer)
+                .replace(RegExp("\\d*[a-zA-Z\u00E4\u00C4\u00FC\u00DC\u00F6\u00D6\u00DF\u00E9-]{".concat(length, ",}\\d*"), "g"), replacer)
                 .replace(/\d+ Uhr \d+/g, replacer)
                 .replace(/\d[\d\s\.,/:]*\d/g, replacer);
         };

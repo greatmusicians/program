@@ -136,7 +136,7 @@ namespace OWListening {
                     : `<span class="cover">${m}</span>`;
             }
             return line
-                .replace(RegExp(`\\d*[a-zA-ZäÄüÜöÖßé-]{${length},}`, "g"), replacer)
+                .replace(RegExp(`\\d*[a-zA-ZäÄüÜöÖßé-]{${length},}\\d*`, "g"), replacer)
                 .replace(/\d+ Uhr \d+/g, replacer)
                 .replace(/\d[\d\s\.,/:]*\d/g, replacer);
         }
