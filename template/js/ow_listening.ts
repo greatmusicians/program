@@ -136,9 +136,10 @@ namespace OWListening {
                     : `<span class="cover">${m}</span>`;
             }
             return line
-                .replace(RegExp(`\\d*[a-zA-ZäÄüÜöÖßé-]{${length},}\\d*`, "g"), replacer)
+                .replace(RegExp(`\\d*[a-zA-ZäÄüÜöÖßé-]{${length},}`, "g"), replacer)
                 .replace(/\d+ Uhr \d+/g, replacer)
-                .replace(/\d[\d\s\.,/:]*\d/g, replacer);
+                .replace(/\d[\d\s\.,/:]*\d/g, replacer)
+                .replace(/\d+/g, replacer);
         }
     }
 
@@ -240,7 +241,7 @@ namespace OWListening {
         if (print) {
             GlobalList.forEach((e) => {
                 e.Transcript()?.coverText(0);
-                e.Note().forEach(e => e.doHide());
+                //e.Note().forEach(e => e.doHide());
             })
             return
         }
