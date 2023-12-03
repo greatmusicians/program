@@ -199,6 +199,10 @@ namespace OWListening {
     }
 
     export function init(print?: boolean): void {
+        let disable = document.getElementById("not-listening");
+        if (disable != null) {
+            return
+        }
         let audioList = Array.from(document.getElementsByTagName("audio"));
         audioList.forEach((audio) => {
             let p = audio.parentElement;

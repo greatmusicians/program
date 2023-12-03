@@ -178,6 +178,10 @@ var OWListening;
         return Data;
     }());
     function init(print) {
+        var disable = document.getElementById("not-listening");
+        if (disable != null) {
+            return;
+        }
         var audioList = Array.from(document.getElementsByTagName("audio"));
         audioList.forEach(function (audio) {
             var p = audio.parentElement;
