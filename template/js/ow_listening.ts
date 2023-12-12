@@ -29,7 +29,7 @@ namespace OWListening {
         constructor(pre: HTMLElement, code: HTMLElement) {
             this.Pre = pre;
             this.Code = code;
-            this.HighlightText = this.highlight(this.Code.innerHTML);
+            this.HighlightText = this.highlight(this.unescape(this.Code.innerHTML));
         }
 
         doHide(): void {
@@ -136,10 +136,15 @@ namespace OWListening {
                     : `<span class="cover">${m}</span>`;
             }
             return line
-                .replace(RegExp(`\\d*[a-zA-ZäÄüÜöÖßé-]{${length},}`, "g"), replacer)
+                .replace(RegExp(`\\d*[a-zA-ZäÄüÜöÖßéœ-]{${length},}`, "g"), replacer)
                 .replace(/\d+ Uhr \d+/g, replacer)
                 .replace(/\d[\d\s\.,/:]*\d/g, replacer)
                 .replace(/\d+/g, replacer);
+        }
+
+        unescape(str: string) {
+            let arrEntities = { 'lt': '<', 'gt': '>', 'nbsp': ' ', 'amp': '&', 'quot': '"' };
+            return str.replace(/&(lt|gt|nbsp|amp|quot);/ig, (_, t) => { return arrEntities[t]; });
         }
     }
 

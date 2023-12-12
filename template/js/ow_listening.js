@@ -24,7 +24,7 @@ var OWListening;
         function Text(pre, code) {
             this.Pre = pre;
             this.Code = code;
-            this.HighlightText = this.highlight(this.Code.innerHTML);
+            this.HighlightText = this.highlight(this.unescape(this.Code.innerHTML));
         }
         Text.prototype.doHide = function () {
             this.Pre.style.display = "none";
@@ -127,10 +127,14 @@ var OWListening;
                     : "<span class=\"cover\">".concat(m, "</span>");
             };
             return line
-                .replace(RegExp("\\d*[a-zA-Z\u00E4\u00C4\u00FC\u00DC\u00F6\u00D6\u00DF\u00E9-]{".concat(length, ",}"), "g"), replacer)
+                .replace(RegExp("\\d*[a-zA-Z\u00E4\u00C4\u00FC\u00DC\u00F6\u00D6\u00DF\u00E9\u0153-]{".concat(length, ",}"), "g"), replacer)
                 .replace(/\d+ Uhr \d+/g, replacer)
                 .replace(/\d[\d\s\.,/:]*\d/g, replacer)
                 .replace(/\d+/g, replacer);
+        };
+        Text.prototype.unescape = function (str) {
+            var arrEntities = { 'lt': '<', 'gt': '>', 'nbsp': ' ', 'amp': '&', 'quot': '"' };
+            return str.replace(/&(lt|gt|nbsp|amp|quot);/ig, function (_, t) { return arrEntities[t]; });
         };
         return Text;
     }());
