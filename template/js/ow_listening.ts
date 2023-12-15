@@ -250,7 +250,7 @@ namespace OWListening {
         if (print) {
             GlobalList.forEach((e) => {
                 e.Transcript()?.coverText(0);
-                //e.Note().forEach(e => e.doHide());
+                e.Note().forEach(e => e.doHide());
             })
             return
         }

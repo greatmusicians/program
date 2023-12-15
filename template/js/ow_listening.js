@@ -225,7 +225,7 @@ var OWListening;
             GlobalList.forEach(function (e) {
                 var _a;
                 (_a = e.Transcript()) === null || _a === void 0 ? void 0 : _a.coverText(0);
-                //e.Note().forEach(e => e.doHide());
+                e.Note().forEach(function (e) { return e.doHide(); });
             });
             return;
         }
