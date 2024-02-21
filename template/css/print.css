@@ -1,0 +1,170 @@
+body {
+    font-size: 16pt;
+    line-height: 1.2;
+    margin: 0em 1.5em 0em 1.5em;
+    padding: 0;
+    font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+    /*允许单词内断行*/
+    /* 这两个在技术上是一样的, 为了兼容了浏览器两个都加上 */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    -ms-word-break: break-all;
+    /* 这个的使用在web-kit中有些危险，他可能会截断所有东西 */
+    word-break: break-all;
+    /* Instead use this non-standard one: */
+    word-break: break-word;
+
+    /* 如果浏览器支持的话增加一个连接符(Blink不支持) */
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+h1 {
+    display: none;
+}
+
+h2 {
+    font-size: 100%;
+    left: 0.5em;
+    margin: 0.5em 0em 0em 0em;
+    /*上边距、右边距、下边距、左边距*/
+}
+
+h3 {
+    font-size: 100%;
+    left: 1em;
+    margin: 0.5em 0em 0em 0.5em;
+    /*上边距、右边距、下边距、左边距*/
+}
+
+h4 {
+    font-size: 100%;
+    left: 1.5em;
+    margin: 0.5em 0em 0em 1em;
+    /*上边距、右边距、下边距、左边距*/
+}
+
+h5 {
+    font-size: 100%;
+    left: 2em;
+    margin: 0.5em 0em 0em 1em;
+    /*上边距、右边距、下边距、左边距*/
+}
+
+/*段落缩进*/
+p {
+    text-indent: 2em;
+    /*em是相对单位，2em即现在一个字大小的两倍*/
+    margin: 10px;
+    /*段落间距*/
+}
+
+ul {
+    margin-left: 1.5em;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+a {
+    text-indent: 2em;
+}
+
+code {
+    font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+}
+
+pre {
+    border: 1px solid #eee;
+    box-shadow: 0px 0px 0px #eee;
+    background-color: #eee;
+    font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+    padding: 0pt;
+    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    margin: 10px;
+    white-space: pre-wrap;
+    /*css-3*/
+    white-space: -moz-pre-wrap;
+    /*Mozilla,since1999*/
+    white-space: -pre-wrap;
+    /*Opera4-6*/
+    white-space: -o-pre-wrap;
+    /*Opera7*/
+    word-wrap: break-word;
+    /*InternetExplorer5.5+*/
+}
+
+form {
+    margin: 1em 0.5em 1em 1.5em;
+    /*上边距、右边距、下边距、左边距*/
+}
+
+textarea {
+    margin: 0.1em 0em 0.1em 0em;
+    /*上边距、右边距、下边距、左边距*/
+    width: 95%;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+.div-table {
+    margin-bottom: 10px;
+}
+
+th,
+td {
+    border: 1px solid #ccc;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+td {
+    min-width: 8%;
+    max-width: 15%;
+    text-align: left;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+img {
+    margin: 10px;
+    max-width: 80%;
+}
+
+button {
+    display: none;
+}
+
+audio {
+    display: none;
+}
+
+#table-of-contents h2 {
+    font-size: 100%;
+    text-align: center;
+    margin-top: 0 auto;
+    margin-bottom: 0px;
+}
+
+#table-of-contents ul {
+    margin-top: 0pt;
+    margin-left: 10pt;
+    margin-bottom: 0pt;
+    padding: 0
+}
+
+#table-of-contents li {
+    padding: 0;
+    margin: 1px;
+    list-style: none;
+}
+
+#table-of-contents ul>:first-child {
+    color: blue;
+}

@@ -1,0 +1,18 @@
+{
+  "ListenPort": "1235",
+  "DirectoryList": [
+    {
+      "Path": "../",
+      "UseChildren": true,
+      "IsPublic": false
+    }
+  ],
+  "AllowIPList": [
+    {
+      "IPRegexp": "^.*$",
+      "Allow": true,
+      "Comment": ""
+    }
+  ],
+  "DefaultLanguage": "de"
+}

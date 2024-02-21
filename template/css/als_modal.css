@@ -1,0 +1,36 @@
+.modal-dialog {
+    max-width: 90%;
+    width: 90%;
+    height: 90%;
+    background-color: rgb(204, 232, 207);
+}
+
+.modal-content {
+    height: 100%;
+    background-color: rgb(204, 232, 207);
+    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.modal-header, .modal-body {
+    max-height: 80%;
+    white-space: pre;
+    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    /*css-3*/
+    white-space: -moz-pre-wrap;
+    /*Mozilla,since1999*/
+    white-space: -pre-wrap;
+    /*Opera4-6*/
+    white-space: -o-pre-wrap;
+    /*Opera7*/
+    word-wrap: break-word;
+    /*InternetExplorer5.5+*/
+}
+
+.modal-footer {
+    margin: 0 auto;
+}

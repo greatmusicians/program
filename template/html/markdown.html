@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="{{.Lang}}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{{ .Title }}</title>
+
+    <!--open link in new tab-->
+    <!--base target="_blank" /-->
+
+    <script type="text/javascript" src="/js/jquery-3.6.3.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/js/jquery-1.12.4.min.js"></script>
+    <![endif]-->
+
+    <script src="/js/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="/js/bootstrap-4.3.1-dist/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="/js/bootstrap4-glyphicons/css/bootstrap-glyphicons.min.css">
+
+    <!--感觉不好看，挺丑的
+    <link rel="stylesheet" href="/js/highlight/monokai.min.css">
+    <link rel='stylesheet' type='text/css' href='/css/highlight.css' />
+    <script type="text/javascript" src="/js/highlight/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>-->
+
+    <link rel='stylesheet' type='text/css' href='/css/als_search.css' />
+    <script type="text/javascript" src="/js/als_search.js"></script>
+    <link rel='stylesheet' type='text/css' href='/css/als_modal.css' />
+    <script type="text/javascript" src="/js/als_listening.js"></script>
+    <link rel='stylesheet' type='text/css' href='/css/als_word_de.css' />
+    <script type="text/javascript" src="/js/als_word_de.js"></script>
+    <script type="text/javascript" src="/js/als_word_de_verb.js"></script>
+    <link rel='stylesheet' type='text/css' href='/css/als_qsa.css' />
+    <script type="text/javascript" src="/js/als_qsa.js"></script>
+    <script type="text/javascript" src="/js/als_gs.js"></script>
+
+    <link rel='stylesheet' type='text/css' href='/css/site_md.css' />
+
+    <script type='text/javascript'>
+        window.onload = function () {
+            AlsListening.init();
+            AlsQSA.init(true);
+            AlsGS.init(true);
+            AlsWordDE.init(true);
+            AlsWordDEVerb.init(true);
+        }
+    </script>
+
+</head>
+
+<body>
+    <div id="search-box" class="search">
+        <input type="search" id="search_keyword" onkeydown="AlsSearch.autosearch(event)">
+        <button type="button" onclick=javascript:AlsSearch.search()>搜索</button>
+    </div>
+
+    {{ .TOC }}
+    {{ .Body }}
+
+    <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div id="modal1-question" class="modal-header">question</div>
+                <div id="modal1-answer" class="modal-body">answer</div>
+                <div class="modal-footer">
+                    <button id="modal1-show" type="button" class="btn btn-primary">显示答案</button>
+                    <button id="modal1-next" type="button" class="btn btn-primary">下一个</button>
+                    <span id="modal1-num"></span>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+</body>
+
+</html>

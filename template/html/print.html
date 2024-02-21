@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="{{.Lang}}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ .Title }}</title>
+
+    <link rel='stylesheet' type='text/css' href='/css/print.css' />
+    <link rel='stylesheet' type='text/css' href='/css/als_word_de.css' />
+    <script type="text/javascript" src="/js/als_word_de.js"></script>
+    <script type="text/javascript" src="/js/als_word_de_verb.js"></script>
+    <link rel='stylesheet' type='text/css' href='/css/als_qsa.css' />
+    <script type="text/javascript" src="/js/als_qsa.js"></script>
+    <script type="text/javascript" src="/js/als_gs.js"></script>
+    <script type="text/javascript" src="/js/als_listening.js"></script>
+
+    <script type='text/javascript'>
+        window.onload = function () {
+            AlsWordDE.init(false);
+            AlsWordDEVerb.init(false);
+            AlsQSA.init(false);
+            AlsGS.init(false);
+            AlsListening.init(true);
+            document.getElementById("complete").innerHTML = "complete";
+        }
+    </script>
+
+</head>
+
+<body>
+    {{ .TOC }}
+    {{ .Body }}
+    <div id="complete" style="display: none;">loading</div>
+</body>
+
+</html>

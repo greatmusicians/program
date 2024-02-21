@@ -1,0 +1,1 @@
+taskkill /f /im als_server.exe

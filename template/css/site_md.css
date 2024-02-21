@@ -1,0 +1,283 @@
+body {
+    background-color: rgb(204, 232, 207);
+    font-size: 20pt;
+    line-height: 1.2;
+    margin: 1em 0.5em 1em 1.5em;
+    /*上边距、右边距、下边距、左边距*/
+    padding: 0;
+    /*从translate.google.com原文处找到的字体*/
+    font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+    /*允许单词内断行*/
+    /* 这两个在技术上是一样的, 为了兼容了浏览器两个都加上 */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    -ms-word-break: break-all;
+    /* 这个的使用在web-kit中有些危险，他可能会截断所有东西 */
+    word-break: break-all;
+    /* Instead use this non-standard one: */
+    word-break: break-word;
+
+    /* 如果浏览器支持的话增加一个连接符(Blink不支持) */
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+h1 {
+    color: rgb(39, 0, 174);
+    font-size: 110%;
+    left: 0.5em;
+    margin: 0.5em 0em 0em 0em;
+    /*上边距、右边距、下边距、左边距*/
+}
+
+h2 {
+    color: rgb(39, 0, 174);
+    font-size: 100%;
+    left: 1em;
+    margin: 0.5em 0em 0em 0.5em;
+    /*上边距、右边距、下边距、左边距*/
+}
+
+h3 {
+    color: rgb(39, 0, 174);
+    font-size: 100%;
+    left: 1.5em;
+    margin: 0.5em 0em 0em 1em;
+    /*上边距、右边距、下边距、左边距*/
+}
+
+h4 {
+    color: rgb(39, 0, 174);
+    font-size: 100%;
+    left: 2em;
+    margin: 0.5em 0em 0em 1em;
+    /*上边距、右边距、下边距、左边距*/
+}
+
+/*段落缩进*/
+p {
+    text-indent: 2em;
+    /*em是相对单位，2em即现在一个字大小的两倍*/
+    margin: 10px 0px 10px 0px;
+    /*段落间距*/
+}
+
+ul {
+    margin-left: 2.5em;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+a {
+    text-indent: 2em;
+}
+
+code {
+    font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+}
+
+pre {
+    border: 3px solid #888;
+    box-shadow: 0px 0px 0px #eee;
+    background-color: rgb(200, 200, 200);
+    padding: 0 0 2px 0;
+    font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+    font-size: 110%;
+    overflow: auto;
+    cursor: default;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    margin: 10px 1.5em 10px 2em;
+    text-indent: 0;
+    white-space: pre-wrap;
+    /*css-3*/
+    white-space: -moz-pre-wrap;
+    /*Mozilla,since1999*/
+    white-space: -pre-wrap;
+    /*Opera4-6*/
+    white-space: -o-pre-wrap;
+    /*Opera7*/
+    word-wrap: break-word;
+    /*InternetExplorer5.5+*/
+}
+
+pre>code>span.cover {
+    color: rgb(200, 200, 200);
+    /*与pre中的background-color一致，实现隐藏文字的效果*/
+    border-bottom: 3px solid brown;
+    /*通过设置font-size和vertical-align也能实现border-bottom向上提的效果*/
+    /*font-size: 80%;
+    vertical-align: top;*/
+}
+
+pre>code>span.odd {
+    border-bottom: 3px solid blue;
+}
+
+pre>code>span.cover:hover {
+    color: inherit;
+}
+
+/*用于给空格加上小圆点的背景，暂不启用*/
+pre>code>span.space {
+    /* https://www.svgbackgrounds.com/tools/svg-to-css/ */
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" version="1.1"><circle cx="3" cy="20" r="2" fill="darkgray" /></svg>');
+}
+
+form {
+    margin: 1em 0.5em 1em 1.5em;
+    /*上边距、右边距、下边距、左边距*/
+}
+
+textarea {
+    margin: 0.1em 0em 0.1em 0em;
+    /*上边距、右边距、下边距、左边距*/
+    width: 95%;
+    background-color: rgb(200, 220, 200);
+    font-size: 100%;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+.div-table {
+    margin-bottom: 10px;
+}
+
+th,
+td {
+    border: 2px solid #aaa;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+td {
+    min-width: 8%;
+    max-width: 15%;
+}
+
+img {
+    margin: 10px 0px 10px 2em;
+    max-width: 90%;
+}
+
+audio {
+    text-indent: 0;
+}
+
+audio:focus {
+    background-color: #007bff;
+    border: 2px solid #007bff;
+    border-radius: .3rem;
+}
+
+.top-container {
+    display: flex;
+    align-items: center;
+    margin-left: 2em;
+}
+
+/*index页面上一个一个链接*/
+.index-card {
+    min-width: 350px;
+    background-color: rgba(0, 0, 0, 0);
+    display: inline-block;
+    border: 0;
+}
+
+.index-card-body {
+    padding: 5px 5px 5px 30px;
+}
+
+.index-link {}
+
+.index-a-extra {
+    background-color: bisque;
+    text-decoration: none;
+    font-size: 50%;
+    color: #000000;
+    font-weight: normal;
+}
+
+#table-of-contents {
+    font-size: 9pt;
+    position: fixed;
+    right: 0em;
+    top: 0em;
+    background: rgb(204, 232, 207);
+    box-shadow: 0 0 1em #777777;
+    -webkit-box-shadow: 0 0 1em #777777;
+    -moz-box-shadow: 0 0 1em #777777;
+    border-bottom-left-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    text-align: left;
+    /* ensure doesn't flow off the screen when expanded */
+    max-height: 80%;
+    overflow: hidden;
+    z-index: 200;
+}
+
+#table-of-contents h2 {
+    font-size: 20pt;
+    color: #000000;
+    max-width: 8em;
+    font-weight: normal;
+    padding-left: 0em;
+    padding-right: 0em;
+    padding-top: 0.1em;
+    padding-bottom: 0.05em;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 0.1em;
+    font-weight: 600;
+}
+
+#table-of-contents ul {
+    margin-top: 0pt;
+    margin-left: 10pt;
+    margin-bottom: 0pt;
+    padding: 0
+}
+
+#table-of-contents li {
+    font-size: 15pt;
+    padding: 0;
+    margin: 1px;
+    list-style: none;
+}
+
+#table-of-contents ul>:first-child {
+    color: blue;
+}
+
+#table-of-contents #text-table-of-contents {
+    display: none;
+    text-align: left;
+}
+
+#table-of-contents:hover #text-table-of-contents {
+    display: block;
+    padding: 0.5em;
+    margin-top: 0em;
+    margin-left: -11px;
+}
+
+#table-of-contents:hover h2 {
+    display: none;
+}
+
+@media screen {
+    #table-of-contents {
+        float: right;
+        border: 1px solid #CCC;
+        max-width: 50%;
+        overflow: auto;
+    }
+}
+
+/* END OF @media screen */
