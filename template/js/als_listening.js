@@ -267,7 +267,7 @@ var AlsListening;
             //e.appendButton(Position.AfterAudio, newButton("▶ 向后x3", `AlsListening.playFrom(${i}, false, 3)`));
             e.appendButton(Position.AfterAudio, newButton("▶ 向前", "AlsListening.playFrom(".concat(i, ", true, 1)")));
             //e.appendButton(Position.AfterAudio, newButton("▶ 向前x3", `AlsListening.playFrom(${i}, true, 3)`));
-            e.appendButton(Position.AfterAudio, newButton("覆盖1", "AlsListening.coverText(".concat(i, ", 1)")));
+            e.appendButton(Position.AfterAudio, newButton("覆盖0", "AlsListening.coverText(".concat(i, ", 0)")));
             //e.appendButton(Position.AfterAudio, newButton("覆盖4", `AlsListening.coverText(${i}, 4)`));
             e.Transcript.forEach(function (t, ti) { return e.appendButton(Position.AfterAudio, newButton("文本" + t.Language, "AlsListening.reverseHide(".concat(i, ", true, ").concat(ti, ", false)"))); });
             e.Note.length > 0 &&

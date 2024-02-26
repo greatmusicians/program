@@ -295,7 +295,7 @@ namespace AlsListening {
             //e.appendButton(Position.AfterAudio, newButton("▶ 向后x3", `AlsListening.playFrom(${i}, false, 3)`));
             e.appendButton(Position.AfterAudio, newButton("▶ 向前", `AlsListening.playFrom(${i}, true, 1)`));
             //e.appendButton(Position.AfterAudio, newButton("▶ 向前x3", `AlsListening.playFrom(${i}, true, 3)`));
-            e.appendButton(Position.AfterAudio, newButton("覆盖1", `AlsListening.coverText(${i}, 1)`));
+            e.appendButton(Position.AfterAudio, newButton("覆盖0", `AlsListening.coverText(${i}, 0)`));
             //e.appendButton(Position.AfterAudio, newButton("覆盖4", `AlsListening.coverText(${i}, 4)`));
 
             e.Transcript.forEach((t, ti) => e.appendButton(Position.AfterAudio, newButton("文本" + t.Language, `AlsListening.reverseHide(${i}, true, ${ti}, false)`)));
