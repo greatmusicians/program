@@ -27,6 +27,7 @@ if [ "$1" = "pull" ]; then
     pull ./Menschen
     pull ./Menschen_Berufstrainer
     pull ./Aspekte_B1.2
+    pull ./Aspekte_B2
     pull ./Sprechen
     pull ./program
     pull ./other
@@ -34,6 +35,7 @@ else
     push ./Menschen
     push ./Menschen_Berufstrainer
     push ./Aspekte_B1.2
+    push ./Aspekte_B2
     push ./Sprechen
     push ./program
     push ./other

@@ -6,6 +6,7 @@ IF "%~1"=="pull" (
   CALL :pull Menschen
   CALL :pull Menschen_Berufstrainer
   CALL :pull Aspekte_B1.2
+  CALL :pull Aspekte_B2
   CALL :pull Sprechen
   CALL :pull program
   CALL :pull other
@@ -13,6 +14,7 @@ IF "%~1"=="pull" (
   CALL :push Menschen
   CALL :pull Menschen_Berufstrainer
   CALL :push Aspekte_B1.2
+  CALL :push Aspekte_B2
   CALL :push Sprechen
   CALL :push program
   CALL :push other
