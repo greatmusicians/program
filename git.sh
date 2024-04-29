@@ -29,6 +29,7 @@ if [ "$1" = "pull" ]; then
     pull ./Aspekte_B1.2
     pull ./Aspekte_B2
     pull ./Sprechen
+    pull ./TED
     pull ./program
     pull ./other
 else
@@ -37,6 +38,7 @@ else
     push ./Aspekte_B1.2
     push ./Aspekte_B2
     push ./Sprechen
+    push ./TED
     push ./program
     push ./other
 fi

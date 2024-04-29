@@ -8,6 +8,7 @@ IF "%~1"=="pull" (
   CALL :pull Aspekte_B1.2
   CALL :pull Aspekte_B2
   CALL :pull Sprechen
+  CALL :pull TED
   CALL :pull program
   CALL :pull other
 ) ELSE (
@@ -16,6 +17,7 @@ IF "%~1"=="pull" (
   CALL :push Aspekte_B1.2
   CALL :push Aspekte_B2
   CALL :push Sprechen
+  CALL :push TED
   CALL :push program
   CALL :push other
 )
