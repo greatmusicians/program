@@ -11,6 +11,9 @@
 `````
 cd D:\wiki_deutsch
 git clone https://github.com/greatmusicians/program.git
+git clone https://github.com/greatmusicians/Sprechen.git
+git clone https://github.com/greatmusicians/Aspekte_B1.2.git
+git clone https://github.com/greatmusicians/Aspekte_B2.git
 git clone https://github.com/greatmusicians/Menschen.git
 git clone https://github.com/greatmusicians/Menschen_Berufstrainer.git
 git clone https://github.com/greatmusicians/Menschen_Intensivtrainer.git
